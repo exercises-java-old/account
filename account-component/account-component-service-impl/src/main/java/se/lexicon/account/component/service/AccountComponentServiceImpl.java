@@ -18,13 +18,4 @@ public class AccountComponentServiceImpl implements AccountComponentService {
 
     private final AccountDao accountDao;
 
-    public AccountComponentServiceImpl(AccountDao accountDao) {
-        this.accountDao = Required.notNull(accountDao, "accountDao");
-    }
-
-    @Override
-    public void createAccount(Account account) {
-        AccountEntity  accountEntity = AccountEntity.builder().withSsn(account.getSsn()).withAmount(account.getAmount()).build();
-        accountDao.insert(accountEntity);
-    }
 }

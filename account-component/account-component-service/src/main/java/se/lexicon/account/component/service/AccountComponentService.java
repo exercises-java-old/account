@@ -11,10 +11,4 @@ public interface AccountComponentService {
 
     String DEFAULT_BEAN_NAME = "accountComponentService";
 
-    //account.hashCode() % numberOfPartitions
-    void createAccount(@Routing("getSsn") Account account);
-
-
-
-
 }
