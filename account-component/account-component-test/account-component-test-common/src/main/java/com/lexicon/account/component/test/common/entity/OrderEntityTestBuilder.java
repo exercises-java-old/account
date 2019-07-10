@@ -1,6 +1,5 @@
 package com.lexicon.account.component.test.common.entity;
 
-import com.lexicon.account.component.entity.AccountEntity;
 import com.lexicon.account.component.entity.OrderEntity;
 import com.so4it.common.util.object.Required;
 import com.so4it.test.domain.AbstractTestBuilder;

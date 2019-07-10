@@ -1,7 +1,5 @@
 package com.seb.account.component.test.integration.dao;
 
-import com.lexicon.account.component.service.AccountComponentServiceProvider;
-import com.seb.account.component.test.integration.service.AccountComponentServiceIntegrationTest;
 import com.so4it.common.bean.MapBeanContext;
 import com.so4it.common.jmx.MBeanRegistry;
 import com.so4it.common.jmx.MBeanRegistryFactory;
@@ -11,7 +9,6 @@ import com.so4it.configuration.core.Setting;
 import com.so4it.configuration.test.common.TestConfigurationSource;
 import com.so4it.configuration.test.common.TestConfigurationSourceTestRule;
 import com.so4it.gs.rpc.test.common.ServiceBeanStateRegistry;
-import com.so4it.gs.rpc.test.common.ServiceBindingRule;
 import com.so4it.gs.rpc.test.common.ServiceFrameworkCommonTest;
 import com.so4it.registry.core.service.ServiceRegistryClient;
 import com.so4it.registry.test.common.FakeServiceRegistry;
@@ -29,7 +26,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        AccountComponentDaoIntegrationTest.class
+        AccountComponentDaoIntegrationTest.class,
+        OrderComponentDaoIntegrationTest.class
 })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AccountComponentDaoIntegrationTestSuite {
@@ -71,7 +69,6 @@ public class AccountComponentDaoIntegrationTestSuite {
         }
         return EXPORT_TEST_RULE;
     }
-
 
 
     public static GigaSpaceEmbeddedLusTestRule getGigaSpacesRule() {

@@ -1,6 +1,5 @@
 package com.seb.account.component.test.integration.service;
 
-import com.lexicon.account.component.service.AccountComponentServiceProvider;
 import com.so4it.common.bean.MapBeanContext;
 import com.so4it.common.jmx.MBeanRegistry;
 import com.so4it.common.jmx.MBeanRegistryFactory;
@@ -22,6 +21,7 @@ import org.junit.rules.RuleChain;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
+import se.lexicon.account.component.service.AccountComponentServiceProvider;
 
 /**
  * @author Magnus Poromaa {@literal <mailto:magnus.poromaa@so4it.com/>}
