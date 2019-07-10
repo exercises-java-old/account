@@ -1,9 +1,9 @@
-package com.seb.account.component.test.integration;
+package com.seb.account.component.test.integration.client;
 
 import com.lexicon.account.component.entity.AccountEntity;
-import com.lexicon.account.component.service.AccountComponentService;
 import com.lexicon.account.component.test.common.domain.AccountTestBuilder;
 import com.seb.account.component.client.AccountComponentClient;
+import com.seb.account.component.test.integration.service.AccountComponentServiceIntegrationTestSuite;
 import com.so4it.test.category.IntegrationTest;
 import com.so4it.test.gs.rule.ClearGigaSpaceTestRule;
 import org.junit.Assert;
@@ -21,18 +21,18 @@ import org.openspaces.core.GigaSpace;
 public class AccountComponentClientIntegrationTest {
 
     @ClassRule
-    public static final RuleChain SUITE_RULE_CHAIN = AccountComponentIntegrationTestSuite.SUITE_RULE_CHAIN;
+    public static final RuleChain SUITE_RULE_CHAIN = AccountComponentServiceIntegrationTestSuite.SUITE_RULE_CHAIN;
 
     @Rule
-    public ClearGigaSpaceTestRule clearGigaSpaceTestRule = new ClearGigaSpaceTestRule(AccountComponentIntegrationTestSuite.getExportContext().getBean(GigaSpace.class));
+    public ClearGigaSpaceTestRule clearGigaSpaceTestRule = new ClearGigaSpaceTestRule(AccountComponentServiceIntegrationTestSuite.getExportContext().getBean(GigaSpace.class));
 
     @Test
     public void testCreatingAccount(){
-        AccountComponentClient accountComponentClient = AccountComponentIntegrationTestSuite.getImportContext().getBean(AccountComponentClient.class);
+        AccountComponentClient accountComponentClient = AccountComponentServiceIntegrationTestSuite.getImportContext().getBean(AccountComponentClient.class);
         accountComponentClient.createAccount(AccountTestBuilder.builder().build());
 
 
-        Assert.assertEquals(1,AccountComponentIntegrationTestSuite.getExportContext().getBean(GigaSpace.class).count(AccountEntity.templateBuilder().build()));
+        Assert.assertEquals(1, AccountComponentServiceIntegrationTestSuite.getExportContext().getBean(GigaSpace.class).count(AccountEntity.templateBuilder().build()));
 
     }
 

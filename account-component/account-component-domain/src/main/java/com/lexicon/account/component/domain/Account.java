@@ -7,7 +7,9 @@ import com.so4it.common.util.object.ValueObject;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Magnus Poromaa {@literal <mailto:magnus.poromaa@so4it.com/>}
@@ -25,6 +27,9 @@ public class Account extends ValueObject {
 
     private BigDecimal amount;
 
+    @Allowed(value = "Not necessary to have order on an account",types = {Allowed.Type.NULLABLE})
+    private Set<Order> orders;
+
 
     private Account() {
     }
@@ -33,13 +38,13 @@ public class Account extends ValueObject {
         this.id = Required.notNull(builder.id,"id");
         this.ssn = Required.notNull(builder.ssn,"ssn");
         this.amount = Required.notNull(builder.amount,"amount");
+        this.orders = builder.orders;
     }
 
 
     public String getId() {
         return id;
     }
-
 
     public String getSsn() {
         return ssn;
@@ -49,6 +54,9 @@ public class Account extends ValueObject {
         return amount;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
 
     @Override
     protected Object[] getIdFields() {
@@ -70,6 +78,10 @@ public class Account extends ValueObject {
 
         private BigDecimal amount;
 
+        private Set<Order> orders = new HashSet<>();
+
+
+
 
 
         public Builder withId(String id){
@@ -85,6 +97,11 @@ public class Account extends ValueObject {
 
         public Builder withAmount(BigDecimal amount){
             this.amount = amount;
+            return this;
+        }
+
+        public Builder withOrders(Set<Order> orders){
+            this.orders = orders;
             return this;
         }
 

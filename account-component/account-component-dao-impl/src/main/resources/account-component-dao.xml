@@ -18,4 +18,9 @@
     </bean>
 
 
+    <bean id="orderDao" class="com.seb.account.component.dao.OrderDaoImpl">
+        <constructor-arg name="gigaSpace" ref="accountGigaSpace"/>
+    </bean>
+
+
 </beans>

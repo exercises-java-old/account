@@ -1,6 +1,7 @@
-package com.seb.account.component.test.integration;
+package com.seb.account.component.test.integration.dao;
 
 import com.lexicon.account.component.service.AccountComponentServiceProvider;
+import com.seb.account.component.test.integration.service.AccountComponentServiceIntegrationTest;
 import com.so4it.common.bean.MapBeanContext;
 import com.so4it.common.jmx.MBeanRegistry;
 import com.so4it.common.jmx.MBeanRegistryFactory;
@@ -28,11 +29,10 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        AccountComponentServiceIntegrationTest.class,
-        AccountComponentClientIntegrationTest.class
+        AccountComponentDaoIntegrationTest.class
 })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AccountComponentIntegrationTestSuite {
+public class AccountComponentDaoIntegrationTestSuite {
 
     private static final int LUS_PORT = PortUtil.nextFreePort();
 
@@ -46,28 +46,21 @@ public class AccountComponentIntegrationTestSuite {
 
     private static GigaSpaceEmbeddedLusTestRule GIGA_SPACE_TEST_RULE;
 
-    private static SpringContextRule IMPORT_TEST_RULE;
-
     private static SpringContextRule EXPORT_TEST_RULE;
 
     private static TestConfigurationSourceTestRule CONFIGURATION_SOURCE_TEST_RULE;
 
-    private static ServiceBindingRule SERVICE_BINDING_RULE;
 
     @ClassRule
     public static final RuleChain SUITE_RULE_CHAIN = RuleChain
             .outerRule(getGigaSpacesRule())
-            .around(getImportContext())
             .around(getExportContext())
-            .around(getConfigurationSourceRule())
-            .around(getServiceBindingRule());
+            .around(getConfigurationSourceRule());
 
     public static SpringContextRule getExportContext() {
         if (EXPORT_TEST_RULE == null) {
             EXPORT_TEST_RULE = new SpringContextRule()
                     .addXmlConfiguration("account-component-dao.xml")
-                    .addXmlConfiguration("account-component-service.xml")
-                    .addXmlConfiguration("account-component-test-export.xml")
                     .addXmlConfiguration("account-component-test-space.xml")
                     .addBean(MBeanRegistry.DEFAULT_BEAN_NAME, MBeanRegistryFactory.createRegistry())
                     .addBean(ServiceRegistryClient.DEFAULT_API_BEAN_NAME, SERVICE_REGISTRY)
@@ -79,19 +72,6 @@ public class AccountComponentIntegrationTestSuite {
         return EXPORT_TEST_RULE;
     }
 
-    public static synchronized SpringContextRule getImportContext() {
-        if (IMPORT_TEST_RULE == null) {
-            IMPORT_TEST_RULE = new SpringContextRule();
-            IMPORT_TEST_RULE.addXmlConfiguration("account-component-client.xml");
-            IMPORT_TEST_RULE.addXmlConfiguration("account-component-test-import.xml");
-            IMPORT_TEST_RULE.addBean(MapBeanContext.DEFAULT_BEAN_NAME, new MapBeanContext());
-            IMPORT_TEST_RULE.addBean(ServiceRegistryClient.DEFAULT_API_BEAN_NAME, SERVICE_REGISTRY);
-            IMPORT_TEST_RULE.addBean(DynamicConfiguration.DEFAULT_BEAN_NAME, DYNAMIC_CONFIGURATION);
-            IMPORT_TEST_RULE.addBean(ServiceBeanStateRegistry.DEFAULT_BEAN_NAME, SERVICE_BEAN_STATE_REGISTRY);
-            IMPORT_TEST_RULE.addProvider(ServiceFrameworkCommonTest.getPropertyProvider());
-        }
-        return IMPORT_TEST_RULE;
-    }
 
 
     public static GigaSpaceEmbeddedLusTestRule getGigaSpacesRule() {
@@ -117,15 +97,6 @@ public class AccountComponentIntegrationTestSuite {
     public static <T> void withSetting(Setting<T> name, T value) {
         CONFIGURATION_SOURCE.set(name, value);
     }
-
-    public static ServiceBindingRule getServiceBindingRule() {
-        if (SERVICE_BINDING_RULE == null) {
-            SERVICE_BINDING_RULE = new ServiceBindingRule(SERVICE_BEAN_STATE_REGISTRY);
-            SERVICE_BINDING_RULE.addServiceProvider(AccountComponentServiceProvider.class);
-        }
-        return SERVICE_BINDING_RULE;
-    }
-
 
 }
 
