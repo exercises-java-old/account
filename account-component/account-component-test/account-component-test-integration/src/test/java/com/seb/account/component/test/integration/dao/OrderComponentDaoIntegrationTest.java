@@ -3,7 +3,7 @@ package com.seb.account.component.test.integration.dao;
 import com.lexicon.account.component.entity.OrderEntity;
 import com.lexicon.account.component.test.common.entity.OrderEntityTestBuilder;
 import com.seb.account.component.test.integration.service.AccountComponentServiceIntegrationTestSuite;
-import com.seb.account.componment.dao.OrderDao;
+import se.lexicon.account.componment.dao.OrderDao;
 import com.so4it.test.category.IntegrationTest;
 import com.so4it.test.gs.rule.ClearGigaSpaceTestRule;
 import org.junit.ClassRule;

@@ -60,12 +60,6 @@ public class OrderEntity extends IdEntity<String> {
         this.amount = amount;
     }
 
-
-
-
-
-
-
     public static Builder builder() {
         return new Builder(false);
     }

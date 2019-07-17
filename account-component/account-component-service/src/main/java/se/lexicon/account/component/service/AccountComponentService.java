@@ -27,14 +27,4 @@ public interface AccountComponentService {
 
 
 
-    public static class BigDecimalRemoteResultReducer implements RemoteResultReducer<BigDecimal>{
-
-        @Override
-        public BigDecimal reduce(List<RemoteResult<BigDecimal>> list) throws ResultReducerException {
-            return BigDecimal.valueOf( list.stream().map( rr -> rr.getResult().doubleValue()).reduce(0.0,Double::sum));
-        }
-    }
-
-
-
 }

@@ -1,7 +1,6 @@
 package com.lexicon.account.component.test.common.domain;
 
-import com.lexicon.account.component.domain.Account;
-import com.lexicon.account.component.domain.Order;
+import se.lexicon.account.component.domain.Order;
 import com.so4it.common.util.object.Required;
 import com.so4it.test.domain.AbstractTestBuilder;
 
@@ -18,6 +17,7 @@ public class OrderTestBuilder extends AbstractTestBuilder<Order> {
     public OrderTestBuilder(Order.Builder builder) {
         this.builder = Required.notNull(builder, "builder");
         this.builder
+                .withSsn("1111111111")
                 .withAmount(BigDecimal.TEN)
                 .withOrderBookId("test");
 
@@ -26,6 +26,20 @@ public class OrderTestBuilder extends AbstractTestBuilder<Order> {
     public static OrderTestBuilder builder() {
         return new OrderTestBuilder(Order.builder());
     }
+
+
+    public OrderTestBuilder withSsn(String ssn){
+        builder.withSsn(ssn);
+        return this;
+    }
+
+
+    public OrderTestBuilder withAmount(BigDecimal amount){
+        builder.withAmount(amount);
+        return this;
+    }
+
+
 
     @Override
     public Order build() {
