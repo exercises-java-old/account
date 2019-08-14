@@ -3,6 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <import resource="classpath*:account-component-service-parallel-queue.xml"/>
+
     <bean id="accountComponentService" class="se.lexicon.account.component.service.AccountComponentServiceImpl">
         <constructor-arg name="accountDao" ref="accountDao"/>
         <constructor-arg name="orderDao" ref="orderDao"/>
@@ -12,6 +15,7 @@
 
     <bean id="orderComponentService" class="se.lexicon.account.component.service.OrderComponentServiceImpl">
         <constructor-arg name="orderDao" ref="orderDao"/>
+        <constructor-arg name="orderParallelQueue" ref="orderParallelQueue"/>
     </bean>
 
 

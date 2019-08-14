@@ -28,5 +28,11 @@
             <groupId>com.lexicon</groupId>
             <artifactId>account-component-service</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.so4it.sugar</groupId>
+            <artifactId>gigaspaces-parallel-queue</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
