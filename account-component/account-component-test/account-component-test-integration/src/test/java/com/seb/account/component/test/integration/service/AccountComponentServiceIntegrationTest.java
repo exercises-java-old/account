@@ -5,6 +5,8 @@ import com.lexicon.account.component.test.common.domain.AccountTestBuilder;
 import com.lexicon.account.component.test.common.domain.OrderTestBuilder;
 import com.so4it.test.category.IntegrationTest;
 import com.so4it.test.common.Assert;
+import com.so4it.test.common.probe.Poller;
+import com.so4it.test.common.probe.SatisfiedWhenTrueReturned;
 import com.so4it.test.gs.rule.ClearGigaSpaceTestRule;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -32,7 +34,7 @@ public class AccountComponentServiceIntegrationTest {
     public ClearGigaSpaceTestRule clearGigaSpaceTestRule = new ClearGigaSpaceTestRule(AccountComponentServiceIntegrationTestSuite.getExportContext().getBean(GigaSpace.class));
 
     @Test
-    public void testCreatingAccountAndCheckBalanceIsCorrect() {
+    public void testCreatingAccountAndCheckBalanceIsCorrect() throws InterruptedException {
 
         AccountComponentService accountComponentService = AccountComponentServiceIntegrationTestSuite.getImportContext().getBean(AccountComponentService.class);
         OrderComponentService orderComponentService = AccountComponentServiceIntegrationTestSuite.getImportContext().getBean(OrderComponentService.class);
@@ -56,13 +58,9 @@ public class AccountComponentServiceIntegrationTest {
         orderComponentService.placeOrder(OrderTestBuilder.builder().withSsn(SSN).withAmount(BigDecimal.TEN).build());
 
 
+        Poller.pollAndCheck(SatisfiedWhenTrueReturned.create(() -> orderComponentService.getOrders(SSN).size() == 2));
 
-        Orders orders = orderComponentService.getOrders(SSN);
-        Assert.assertEquals(2, orders.size());
         Assert.assertEquals(BigDecimal.valueOf(11.0), orderComponentService.getTotalOrderValueOfAllAccounts());
-
-
-
 
     }
 

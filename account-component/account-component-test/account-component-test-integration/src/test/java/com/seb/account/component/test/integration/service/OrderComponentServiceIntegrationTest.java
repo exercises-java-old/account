@@ -1,7 +1,6 @@
 package com.seb.account.component.test.integration.service;
 
-import com.lexicon.account.component.domain.Account;
-import com.lexicon.account.component.test.common.domain.AccountTestBuilder;
+
 import com.lexicon.account.component.test.common.domain.OrderTestBuilder;
 import com.so4it.test.category.IntegrationTest;
 import com.so4it.test.common.Assert;
@@ -15,7 +14,6 @@ import org.junit.experimental.categories.Category;
 import org.junit.rules.RuleChain;
 import org.openspaces.core.GigaSpace;
 import se.lexicon.account.component.domain.Order;
-import se.lexicon.account.component.service.AccountComponentService;
 import se.lexicon.account.component.service.OrderComponentService;
 
 import java.math.BigDecimal;

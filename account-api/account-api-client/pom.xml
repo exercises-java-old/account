@@ -12,6 +12,7 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>com.lexicon</groupId>
             <artifactId>account-api-common</artifactId>
@@ -39,5 +40,5 @@
             <groupId>com.so4it.sugar</groupId>
             <artifactId>metric-springframework</artifactId>
         </dependency>
-    </dependencies>
+   </dependencies>
 </project>

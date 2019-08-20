@@ -21,16 +21,18 @@ public class OrderParallelQueueConsumer {
      * This will be called by the parallel queue framework guaranteeing that only one order for the same
      * accoutn id will be handled at the time
      *
-     * @param orderEntity
+     * @param placeOrderEvent
      */
     @ParallelQueueConsumer
-    public void onOrder(PlaceOrderEvent orderEntity) {
+    public void onOrder(PlaceOrderEvent placeOrderEvent) {
 
         System.out.println("AAAAAAAAAA\n\n\n");
+        System.out.println(placeOrderEvent);
+
         //
         //String marketId = marketClient.doMatch(PlaceOrderMathRequest.builder(),);
 
 
-        orderDao.insert(OrderEntity.builder().withSsn(orderEntity.getSsn()).withAmount(orderEntity.getAmount()).build());
+        orderDao.insert(OrderEntity.builder().withSsn(placeOrderEvent.getSsn()).withAmount(placeOrderEvent.getAmount()).build());
     }
 }

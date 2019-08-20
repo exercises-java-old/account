@@ -12,6 +12,7 @@
         <module>account-component</module>
 	<!--
 
+        <module>account-api</module>
         <module>agreement</module>
         <module>analytic</module>
         <module>arrangement</module>
